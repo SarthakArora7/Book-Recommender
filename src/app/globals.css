@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #DDDDDD;
   --foreground: #171717;
 }
 
@@ -12,15 +12,28 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
-body {
+/* body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+body {
+  background-color: #d6d3c9;
+  background-image: 
+    radial-gradient(ellipse at 20% 30%, rgba(120, 100, 70, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(90, 75, 55, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.15) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02' numOctaves='5' stitchTiles='stitch' result='big'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch' result='fine'/%3E%3CfeBlend in='big' in2='fine' mode='multiply' result='blended'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.5 1.5 1.5 0 -1.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-blend-mode: multiply, multiply, multiply, multiply;
+  background-attachment: fixed;
+  color: #2b2924;
 }
+
