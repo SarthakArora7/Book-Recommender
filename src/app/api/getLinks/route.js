@@ -8,9 +8,9 @@ export async function GET() {
   try {
     const response = await axios.get(
       "https://www.timesnownews.com/lifestyle/books",
-      //   {
-      //     headers: { 'User-Agent': 'Mozilla/5.0' }
-      //   }
+        {
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        }
     );
     // console.log(response.data)
     const $ = cheerio.load(response.data);
@@ -36,8 +36,19 @@ export async function GET() {
 
     // console.log(items)
 
-    const result = await Link.insertMany(items);
-    Response.json(result);
+    // check which links already exists in the DB
+    const links = items.map((item) => item.link)
+    const existing = await Link.find({ link: { $in: links } }).select("link").lean()
+
+    const existingLinks = new Set(existing.map((d) => d.link))
+
+    const newItems = items.filter((item) => !existingLinks.has(item.link))
+
+    if (newItems.length > 0){
+      const result = await Link.insertMany(newItems)
+      return Response.json(result);
+    }
+
   } catch (error) {
     console.log(error);
   }
