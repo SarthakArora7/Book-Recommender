@@ -19,9 +19,9 @@ export async function GET() {
     // fs.writeFileSync("check.txt", bodyHtml)
 
     const items = [];
-    const regex = /\d+\sBooks/g;
+    const regex = /\d+\sBooks/;
 
-    $(".CategoryListing_CategoryListing__Aq_N3 li").each((index, el) => {
+    $("ul li").each((index, el) => {
       if (items.length == 10) return false;
 
       const title = $(el).find("h3").text().trim();
@@ -47,6 +47,8 @@ export async function GET() {
     if (newItems.length > 0){
       const result = await Link.insertMany(newItems)
       return Response.json(result);
+    }else{
+      return Response.json({fetch: "failed", newItems, existingLinks, existing, items})
     }
 
   } catch (error) {
